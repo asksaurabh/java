@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile and Run Java",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "CURRENT_FILE='${file}'; CURRENT_DIR='${fileDirname}'; WORKSPACE_ROOT='${workspaceFolder}'; FILENAME='${fileBasenameNoExtension}'; cd \"$CURRENT_DIR\"; javac \"$CURRENT_FILE\" 2>/tmp/java_compile_error.log && java \"$FILENAME\" < \"$WORKSPACE_ROOT/input.txt\" > \"$WORKSPACE_ROOT/output.txt\" 2>&1 && echo 'Build successful - check output.txt' || (echo 'Compilation failed:' && cat /tmp/java_compile_error.log && exit 1)"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "revealProblems": "onProblem"
+            },
+            "problemMatcher": {
+                "owner": "java",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            },
+            "detail": "Compiles and runs the current Java file with input from input.txt and output to output.txt (silent on success)"
+        },
+        {
+            "label": "Compile and Run Java (Show Output in Terminal)",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                "-c",
+                "CURRENT_FILE='${file}'; CURRENT_DIR='${fileDirname}'; WORKSPACE_ROOT='${workspaceFolder}'; FILENAME='${fileBasenameNoExtension}'; cd \"$CURRENT_DIR\"; javac \"$CURRENT_FILE\" && echo 'Running with input from input.txt:' && java \"$FILENAME\" < \"$WORKSPACE_ROOT/input.txt\" | tee \"$WORKSPACE_ROOT/output.txt\""
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": [],
+            "detail": "Compiles and runs the current Java file with input from input.txt, shows output in terminal and saves to output.txt"
+        }
+    ]
+}

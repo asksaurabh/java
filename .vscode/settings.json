@@ -1,0 +1,4 @@
+{
+  "sonarlint.analysisExcludesStandalone": "**/*.java",
+  "java.debug.settings.onBuildFailureProceed": true
+}
