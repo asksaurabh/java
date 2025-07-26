@@ -658,3 +658,110 @@ The main differences between an abstract class and an interface in Java are:
 ### Can we have diamond problem in Java?
 TODO: Check this out later.
 
+## Collections in Java
+
+### TODO: Learn about Wrapper classes in depth
+
+### Custom classes in Java
+In Java, you can create custom classes to represent your own data types. A custom class can have attributes (fields) and methods (functions) to define its behavior. Here’s an example of a custom class:
+```java
+public class Person {
+  private String name;
+  private int age;
+
+  public Person(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public int getAge() {
+    return age;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Person p = new Person("Alice", 30);
+    System.out.println("Name: " + p.getName());
+    System.out.println("Age: " + p.getAge());
+  }
+}
+```
+
+### Collections in Java
+Java provides a powerful framework for working with collections of objects. The Java Collections Framework (JCF) provides a set of interfaces and classes to handle groups of objects. The main interfaces in the JCF are:
+- `Collection`: The root interface for all collections.
+- `List`: An ordered collection (also known as a sequence) that allows duplicate elements.
+- `Set`: A collection that does not allow duplicate elements.
+- `Map`: A collection that maps keys to values, where each key is unique.
+- `Queue`: A collection that represents a queue data structure, allowing elements to be processed in a specific order (FIFO).
+
+### List in Java
+A `List` is an ordered collection that allows duplicate elements. The most commonly used implementations of the `List` interface are:
+
+### ArrayList
+ArrayList is a resizable array implementation of the List interface. It provides fast random access to elements and is suitable for scenarios where you need to frequently access elements by index. It is dynamically resizable, meaning it can grow or shrink as needed.
+
+Useful methods:
+- `add(E e)`: Adds the specified element to the end of the list. O(1) time complexity.
+- `add(int index, E element)`: Inserts the specified element at the specified position in the list. O(n) time complexity.
+- `get(int index)`: Returns the element at the specified position in the list. O(1) time complexity.
+- `size()`: Returns the number of elements in the list. O(1) time complexity.
+- `isEmpty()`: Checks if the list is empty. O(1) time complexity.
+- `remove(int index)`: Removes the element at the specified position in the list and returns it. O(n) time complexity.
+- `contains(Object o)`: Checks if the list contains the specified element. O(n) time complexity.
+
+### LinkedList 
+LinkedList is a doubly-linked list implementation of the List interface. It provides fast insertion and deletion of elements at both ends of the list, making it suitable for scenarios where you need to frequently add or remove elements from the beginning or end of the list.
+
+Useful methods:
+1. add/addLast: Adds an element to the end of the list.
+2. addFirst: Adds an element to the beginning of the list.
+3. removeFirst: Removes and returns the first element of the list.
+4. remove/removeLast: Removes and returns the last element of the list.
+5. getFirst: Returns the first element of the list without removing it.
+6. getLast: Returns the last element of the list without removing it.
+7. size: Returns the number of elements in the list.
+8. isEmpty: Checks if the list is empty.
+
+
+### Stack
+Stack is a last-in-first-out (LIFO) data structure that allows you to add and remove elements from the top of the stack. It is implemented using the `Stack` class in Java. 
+A stack is useful for scenarios where you need to keep track of the most recently added elements, such as in function call management or undo operations in applications.
+
+### Useful methods:
+- `push(E item)`: Pushes an item onto the top of the stack.
+- `pop()`: Removes and returns the item at the top of the stack.
+- `peek()`: Returns the item at the top of the stack without removing it.
+- `isEmpty()`: Checks if the stack is empty.
+
+### Vector
+Vector is a resizable array implementation of the List interface, similar to ArrayList. However, Vector is synchronized, meaning it is thread-safe and can be safely used in multi-threaded environments. Vector was part of Java since JDK 1.0, while ArrayList was introduced later in JDK 1.2 as part of the Collections Framework.
+
+### Useful methods:
+- `capacity()`: Returns the current capacity of the vector.
+- Rest same as ArrayList.
+
+### ArrayList vs Vector: Key Differences
+
+| Feature | ArrayList | Vector |
+|---------|-----------|---------|
+| **Synchronization** | Not synchronized (not thread-safe) | Synchronized (thread-safe) |
+| **Performance** | Faster (no synchronization overhead) | Slower (due to synchronization) |
+| **Growth Policy** | Increases by 50% when capacity is exceeded | Doubles in size when capacity is exceeded |
+| **Legacy** | Part of Collections Framework (JDK 1.2+) | Legacy class (JDK 1.0+) |
+| **Thread Safety** | Requires external synchronization for thread safety | Inherently thread-safe |
+| **Memory Usage** | More memory efficient | Less memory efficient (larger growth factor) |
+| **Preferred Usage** | Single-threaded applications or when you handle synchronization manually | Multi-threaded applications (though Collections.synchronizedList() is preferred) |
+
+### When to use which?
+- **Use ArrayList**: In most cases, especially for single-threaded applications or when you can manage thread safety yourself.
+- **Use Vector**: Only when you need a legacy-compatible synchronized list, though `Collections.synchronizedList(new ArrayList<>())` is generally preferred for thread-safe lists.
+
+
+TODO: Learn about thread safety later.
+
