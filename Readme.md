@@ -765,3 +765,199 @@ Vector is a resizable array implementation of the List interface, similar to Arr
 
 TODO: Learn about thread safety later.
 
+## Set Interface
+A `Set` is a collection that **does not allow duplicate elements**. It is implemented using the `Set` interface in Java. The most commonly used implementations of the `Set` interface are:
+
+### HashSet
+HashSet is an implementation of the Set interface that uses a *hash table to store elements*. It provides *constant time* performance for basic operations like add, remove, and contains. However, it *does not* maintain the order of elements. (unordered_set)
+
+### Useful methods:
+- `add(E e)`: Adds the specified element to the set if it is not already present.
+- `remove(Object o)`: Removes the specified element from the set if it is present.
+- `contains(Object o)`: Checks if the set contains the specified element.
+- `size()`: Returns the number of elements in the set.
+- `isEmpty()`: Checks if the set is empty.
+
+### Aside:
+*var keyword* is used to declare a variable without specifying its type explicitly. The compiler infers the type based on the assigned value. It can be used with collections as well, like:
+```java
+HashSet set = new HashSet<Integer>();
+set.add(10);
+set.add(20);
+set.add(30);
+
+for (var element : set) {
+    System.out.println(element);
+}
+```
+
+### TreeSet
+TreeSet is an implementation of the Set interface that uses a *red-black tree* to store unique elements. It maintains the elements in *sorted order* according to their natural ordering or a specified comparator. TreeSet provides *logarithmic time* performance for basic operations like add, remove, and contains. (set)
+
+### Useful methods:
+- Similar to HashSet, but elements are stored in sorted order.
+- Few important methods:
+- `first()`: Returns the first (lowest) element currently in this set.
+- `last()`: Returns the last (highest) element currently in this set.
+- `floor(E e)`: greatest element in this set *less than or equal to* the given element, or null if there is no such element.
+- `ceiling(E e)`: *least element in this set greater than or equal to* the given element, or null if there is no such element.
+
+```java
+TreeSet<Integer> treeSet = new TreeSet<>();
+treeSet.add(30);
+treeSet.add(10);
+treeSet.add(20);
+
+for (Integer element : treeSet) {
+    System.out.println(element); // Output will be in sorted order: 10, 20, 30
+}
+```
+
+## Queue Interface
+A `Queue` is a collection that represents a *first-in-first-out (FIFO)* data structure. It allows you to add elements to the end of the queue and remove elements from the front of the queue. The most commonly used implementations of the Queue interface are:
+
+### ArrayDeque
+ArrayDeque is a resizable array implementation of the Deque interface, which allows elements to be added or removed from both ends of the queue. It provides fast access to elements and is suitable for scenarios where you need to frequently add or remove elements from both ends of the queue.
+
+### Useful methods:
+
+To implement a queue using ArrayDeque, you can use the following methods:
+```
+- offer(E e): Adds the specified element to the end of the queue.
+- poll(): Removes and returns the element at the front of the queue.
+- peek(): Returns the element at the front of the queue without removing it.
+```
+
+To implement a stack using ArrayDeque, you can use the following methods:
+```
+- offerFirst(E e): Adds the specified element to the front of the stack.
+- pollFirst(): Removes and returns the element at the front of the stack.
+- peekFirst(): Returns the element at the front of the stack without removing it.
+```
+
+### PriorityQueue
+PriorityQueue allows you to retrieve the highest-priority element in constant time, while adding and removing elements takes logarithmic time. It is useful for scenarios where you need to process elements based on their priority. By default, it *uses min heap*, meaning the smallest element has the highest priority. You can also provide a custom comparator to change the priority order.
+
+Important methods:
+```
+- offer(E e)/add(E e)
+- poll(): Removes and returns the element with the highest priority (smallest element by default).
+- peek(): Returns the element with the highest priority without removing it.
+- Iterate using pq.isEmpty() checks and pq.poll() to retrieve elements in priority order.
+```
+
+## Map Interface
+A `Map` is a collection that maps keys to values, where each key is unique. It allows you to store and retrieve values based on their associated keys. The most commonly used implementations of the Map interface are:
+
+### HashMap
+HashMap is an implementation of the Map interface that uses a **hash table to store key-value pairs*. It provides constant time performance for basic operations like put, get, and remove. However, it does not maintain the order of elements.
+
+Important methods:
+- `put(K key, V value)`: Adds the specified value with the specified key in the map if not present, or updates the value if the key already exists.
+- `get(Object key)`: Returns the value associated with the specified key, or null if the key is not present.
+- `remove(Object key)`: Removes the key-value pair associated with the specified key.
+- `containsKey(Object key)`: Checks if the map contains the specified key.
+- `size()`: Returns the number of key-value pairs in the map.
+
+How to iterate over a HashMap:
+```java
+HashMap<String, Integer> map = new HashMap<>();
+map.put("Alice", 25);
+map.put("Bob", 30);
+for (Map.Entry<String, Integer> entry : map.entrySet()) {
+  System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+}
+```
+
+### TreeMap
+TreeMap is a red-black tree-based implementation of the Map interface. It stores entries in sorted order based on keys. It provides *logarithmic time performance* for basic operations like put, get, and remove. TreeMap is useful when you need to maintain the order of keys.
+
+Important methods:
+- Similar to HashMap, but entries are stored in sorted order based on keys.
+- `floorKey(K key)`: Returns the greatest key less than or equal to the given key, or null if there is no such key.
+- `ceilingKey(K key)`: Returns the least key greater than or equal to the given key, or null if there is no such key.
+- `firstKey()`: Returns the first (lowest) key currently in this map.
+- `lastKey()`: Returns the last (highest) key currently in this map.
+
+
+## Iterator Interface
+The `Iterator` interface in Java provides a way to iterate over collections (like List, Set, and Map) without exposing the underlying structure. It allows you to traverse elements in a collection sequentially and provides methods to check for the next element, retrieve the current element, and remove elements during iteration.
+
+Before this, one thing in mind, let's say if you need to declare any class that implements `List` for example, you can do it like this:
+```java
+List<String> list = new ArrayList<>();
+List<String> list2 = new LinkedList<>();
+```
+
+This is called **polymorphism**. You can use the `List` interface to refer to any implementation of the List interface, such as ArrayList or LinkedList. This allows you to write code that works with different types of lists without being tied to a specific implementation.
+
+```java
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+  String element = iterator.next();
+  System.out.println(element);
+}
+```
+
+## Common methods on Collections
+
+1. Collections.sort(list, Comparator)
+2. Collections.reverse(list)
+3. Collections.min(list) / max(list)
+4. Collections.frequency(list, element)
+5. Math.pow(base, exponent)
+6. Math.max(a, b) / min(a, b)
+
+## Custom Comparators
+In Java, you can create custom comparators to define the order of elements in collections like List, Set, or Map. A comparator is an interface that defines a method for comparing two objects.
+You can implement the `Comparator` interface and override the `compare()` method to specify the comparison logic. Here’s an example of a custom comparator for sorting a list of strings by their length:
+```java
+import java.util.*;
+
+public class CustomComparatorExample {
+  public static void main(String[] args) {
+    List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+    
+    // Custom comparator to sort by length of strings
+    Comparator<String> lengthComparator = new Comparator<String>() {
+      @Override
+      public int compare(String a, String b) {
+        return Integer.compare(a.length(), b.length());
+      }
+    };
+    
+    Collections.sort(names, lengthComparator);
+    
+    System.out.println("Sorted names by length: " + names);
+  }
+}
+```
+
+This is creating an anonymous class that implements the Comparator<Integer> interface. You're not actually creating an object of the interface directly - you're creating an object of an unnamed class that implements the interface.
+
+1. new Comparator<Integer>() - This looks like you're instantiating an interface, but you're actually declaring a new anonymous class
+2. The {...} block - This contains the implementation of the anonymous class
+3. @Override public int compare(...) - This implements the required method from the Comparator interface.
+
+It's shorthand for:
+```java
+// This is what the anonymous class is doing behind the scenes
+class MyComparator implements Comparator<Integer> {
+  @Override
+  public int compare(Integer a, Integer b) {
+    return a.compareTo(b);
+  }
+}
+
+// Then using it like:
+Collections.sort(numbers, new MyComparator());
+```
+
+How to write the logic?
+Check your condition. Now given two numbers a and b, you need to return:
+- return -1 if you think a should come before b
+- return 1 if you think a should come after b (currently u are in wrong order)
+- return 0 if they are equal (no change in order)
+
+Return 1 if you want order changed.
+
